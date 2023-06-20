@@ -24,12 +24,12 @@ def get_config(conf_path: any, section: str, settings: str) -> any:
 
 # Data Path VARS;
 chdir(path[0])
-cs_conf_path = "..\..\conf\confsets.ini"
+cs_conf_path = "../../conf/confsets.ini"
 confsets_index = int(get_config(cs_conf_path, "ConfSets", "index"))
 confsets_profile = eval(get_config(cs_conf_path, "ConfSets", "profiles"))
-mv_conf_path = f"..\..\conf\\{confsets_profile[confsets_index]}\mv.ini"
-rd_conf_path = f"..\\uvnc\\UltraVNC.ini"
-kitty_app = "..\kitty.exe"
+mv_conf_path = f"../../conf/{confsets_profile[confsets_index]}/mv.ini"
+rd_conf_path = f"../uvnc/UltraVNC.ini"
+kitty_app = "../kitty.exe"
 
 
 # Проверка работы режима - сервис;
@@ -69,7 +69,7 @@ class Util:
         except Exception:
             return False
 
-    # Запуск Tunnel (Если запущен, завершаем и ждем 10 сек):
+    # Запуск Tunnel (Если запущен, завершаем и ждем 10 сек);
     @staticmethod
     def run_tunnel() -> None:
         if Util.check_pid(pids_k_tunnel):
@@ -79,8 +79,8 @@ class Util:
         si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         sp = subprocess.Popen(
             f"{kitty_app} -P {tunnel_port} -i {tunnel_key_server} -T -N -R :{service_id}:127.1:{rd_port} "
-            f"{tunnel_user_server}@{tunnel_host} -auto-store-sshkey -send-to-tray",
-            startupinfo=si)
+            f"{tunnel_user_server}@{tunnel_host} -auto-store-sshkey", startupinfo=si
+        )
         # Получаем PID процесса и записываем в config;
         popen_curpid = sp.pid
         edit_config(mv_conf_path, "Pids", "k_tunnel", str(popen_curpid))

@@ -9,7 +9,7 @@ def createconfig_confsets(conf_path: any) -> None:
     config.set("ConfSets", "profiles", "['main']")
     config.add_section("Viewer")
     config.set("Viewer", "quality_index", "2")
-    config.set("Viewer", "quality_presets", "((17, 6), (17, 4), (17, 2), (17, 0))")
+    config.set("Viewer", "quality_presets", "((16, 6), (16, 4), (16, 2), (16, 0))")
     with open(conf_path, "w") as config_file:
         config.write(config_file, space_around_delimiters=False)
 
@@ -65,6 +65,7 @@ def createconfig_rd(conf_path: any) -> None:
     config.set("admin", "AllowEditClients", "0")
     config.set("admin", "FileTransferTimeout", "60")
     config.set("admin", "noscreensaver", "1")
+    config.set("admin", "rdpmode", "1")
     config.add_section("UltraVNC")
     config.set("UltraVNC", "passwd", "")
     config.set("UltraVNC", "passwd2", "")
@@ -76,7 +77,7 @@ def createconfig_rd(conf_path: any) -> None:
 def createconfig_viewer(conf_path: any) -> None:
     config = configparser.ConfigParser()
     config.add_section("options")
-    config.set("options", "preferred_encoding", "17")
+    config.set("options", "preferred_encoding", "16")
     config.set("options", "8bit", "2")
     config.set("options", "directx", "1")
     config.set("options", "JapKeyboard", "1")

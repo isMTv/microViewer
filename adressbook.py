@@ -13,7 +13,7 @@ from configs import edit_config
 dir_path = Path.cwd()
 chdir(dir_path)
 
-# Global's Var's:
+# Global's Var's;
 abook_path = "None"
 mv_conf_path = "None"
 

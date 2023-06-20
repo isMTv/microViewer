@@ -11,7 +11,7 @@ from configs import edit_config
 from adressbook import window4, form4, ab_insert_data_connect
 from cversion import set_title_app_version, set_components_version
 
-# Global's Var's:
+# Global's Var's;
 rand_id = "None"
 rand_pw = "None"
 connect_id = "None"
@@ -44,8 +44,8 @@ def logger(data_in: str) -> None:
 
 
 class ExternalApp:
-    # Запуск внешних программ с передачей параметров и обработкой returncode, stdout, stderr (скрывает отображение
-    # консоли);
+    # Запуск внешних программ с передачей параметров и обработкой returncode, stdout, stderr
+    # (скрывает отображение консоли);
     @staticmethod
     def run(cmd: any) -> bool:
         sp = subprocess.run(
@@ -178,7 +178,7 @@ class Check:
         else:
             return True
 
-    # Получение текущего локального IP-Адреса хоста:
+    # Получение текущего локального IP-Адреса хоста;
     @staticmethod
     def cur_ip() -> str:
         try:
@@ -200,9 +200,10 @@ class MvApp:
         if MV.connection_type == "id":
             if Check.id(tunnel_local_port, str(tunnel_remote_port)):
                 logger(f"Запускается Tunnel к SSH серверу.")
+                # Параметр -send-to-tray отключен, т.к. не пропадает иконка после закрытия процесса;
                 ExternalApp.popen_hide(
                     f"{k_app} -P {srv_port} -i {key} -T -N -{mode} :{tunnel_local_port}:127.1:{tunnel_remote_port} "
-                    f"{user}@{Tunnel.host} -auto-store-sshkey -send-to-tray", run_type)
+                    f"{user}@{Tunnel.host} -auto-store-sshkey", run_type)
                 sleep(3)
                 return True
             else:
@@ -251,11 +252,11 @@ class MvApp:
         if MV.connection_type == "id":
             Process.kill_pid(pids_tun_server)
             pids_tun_server = "None"
-            # Process.kill_pid(pids_rd_server)
+            # Process.kill_pid(pids_rd_server);
             ExternalApp.popen_hide(f"bin/uvnc/winvnc.exe -kill", "none")
             pids_rd_server = "None"
         elif MV.connection_type == "ip":
-            # Process.kill_pid(pids_rd_server)
+            # Process.kill_pid(pids_rd_server);
             ExternalApp.popen_hide(f"bin/uvnc/winvnc.exe -kill", "none")
             pids_rd_server = "None"
         modes_server = False
@@ -431,10 +432,10 @@ class Tool:
     @staticmethod
     def check_box(dataform: any, state: str) -> None:
         if state == "true":
-            # dataform.toggle()
+            # dataform.toggle();
             dataform.setChecked(True)
         else:
-            # dataform.toggle()
+            # dataform.toggle();
             dataform.setChecked(False)
 
     # Показать/Скрыть поля для ввода статических ID/PW;
@@ -518,7 +519,8 @@ class Window:
 def click_connect() -> None:
     global connect_id, connect_pw
     connect_id = form.lineEdit_id.text()
-    connect_pw = form.lineEdit_password.text()
+    # Удаляем пробелы перед подключением;
+    connect_pw = form.lineEdit_password.text().replace(" ", "")
     Tool.set_modes_button()
     if Check.pw(connect_pw) and MvApp.run_tunnel(Tunnel.port, Tunnel.key_client, "L", connect_id, connect_id,
                                                  Tunnel.user_client, "client"):
@@ -660,7 +662,7 @@ def gui_settings_applay() -> None:
             'service_check_interval_helper': form2.spinBox_helper_service.value(),
             'service_fix_id_pw': str(form2.checkBox_id_pass.isChecked()).lower(),
             'service_id': form2.spinBox_id.value(),
-            'service_password': form2.lineEdit_password.text(),
+            'service_password': form2.lineEdit_password.text().replace(" ", ""),
             'quality_index': form2.comboBox_quality_preset.currentIndex()
         }
         # Если изменилось значение, то обновляем в конфиге на новое;

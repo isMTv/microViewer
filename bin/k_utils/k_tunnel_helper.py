@@ -14,10 +14,10 @@ def get_config(conf_path: any, section: str, settings: str) -> any:
 
 # Data Path VARS;
 chdir(path[0])
-cs_conf_path = "..\..\conf\confsets.ini"
+cs_conf_path = "../../conf/confsets.ini"
 confsets_index = int(get_config(cs_conf_path, "ConfSets", "index"))
 confsets_profile = eval(get_config(cs_conf_path, "ConfSets", "profiles"))
-mv_conf_path = f"..\..\conf\\{confsets_profile[confsets_index]}\mv.ini"
+mv_conf_path = f"../../conf/{confsets_profile[confsets_index]}/mv.ini"
 
 # Проверка работы режима - сервис;
 enabled = get_config(mv_conf_path, "Service", "enabled")

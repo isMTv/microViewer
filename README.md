@@ -35,6 +35,13 @@
 
 ### VNC Viewer:
 ```
+ - Файл настроек:
+# App_microViewer\conf\confsets.ini
+[Viewer]
+quality_index=2
+quality_presets=((16, 6), (16, 4), (16, 2), (16, 0))
+
+ - Расшифровка значений:
 # Encoding:
  - ZRLE = 16
  - ZYWRLE = 17 | u2 = 10
@@ -101,20 +108,22 @@ EOF
 ### Сборка с помощью Nuitka:
 https://nuitka.net/doc/user-manual.html
 ```
-# pip install --upgrade pip
-# pip install pyqt6
+ - Необходимые пакеты:
+# python.exe -m pip install --upgrade pip
+# pip install pyqt6 / для x32 pyqt5
 # pip install wheel
 # pip install nuitka
 # pip install zstandard ordered-set (orderedset)
+# pip install pywin32
 
 # nuitka -h, --help
 (--standalone) или (--onefile)
  - k_tunnel.py + k_tunnel_helper.py
-# nuitka bin/k_utils/k_tunnel.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Kitty_Tunnel' --windows-file-version=1.3.6.0 --windows-product-name='Kitty_Tunnel'
-# nuitka bin/k_utils/k_tunnel_helper.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Kitty_Tunnel_Helper' --windows-file-version=1.3.6.0 --windows-product-name='Kitty_Tunnel_Helper'
+# nuitka bin/k_utils/k_tunnel.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Kitty_Tunnel' --windows-file-version=1.3.7.0 --windows-product-name='Kitty_Tunnel'
+# nuitka bin/k_utils/k_tunnel_helper.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Kitty_Tunnel_Helper' --windows-file-version=1.3.7.0 --windows-product-name='Kitty_Tunnel_Helper'
  - main.py
-# nuitka main.py --onefile --follow-imports --plugin-enable=pyqt6 --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico -o microViewer.exe --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Remote Access over SSH' --windows-file-version=1.3.6.0 --windows-product-name='microViewer'
-# nuitka main.py --standalone --follow-imports --plugin-enable=pyqt6 --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Remote Access over SSH' --windows-file-version=1.3.6.0 --windows-product-name='microViewer'
+# nuitka main.py --onefile --follow-imports --plugin-enable=pyqt6 --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico -o microViewer.exe --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Remote Access over SSH' --windows-file-version=1.3.7.0 --windows-product-name='microViewer'
+# nuitka main.py --standalone --follow-imports --plugin-enable=pyqt6 --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name='open-networks.ru' --windows-file-description='microViewer - Remote Access over SSH' --windows-file-version=1.3.7.0 --windows-product-name='microViewer'
 
  - Компиляция. Если для x64, то в переменной среды "Path": пути для x64 должны быть над x32;
 - \Python310\Scripts\
@@ -127,8 +136,8 @@ https://nuitka.net/doc/user-manual.html
 python-3.8.10 (x32) для full updates
 python-3.7.6 (x32) для no updates (Win7 SP1 [21.02.2011])
  - k_tunnel.py + k_tunnel_helper.py
-# nuitka bin/k_utils/k_tunnel.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name="open-networks.ru" --windows-file-description="microViewer - Kitty_Tunnel" --windows-file-version=1.3.6.0 --windows-product-name="Kitty_Tunnel"
-# nuitka bin/k_utils/k_tunnel_helper.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name="open-networks.ru" --windows-file-description="microViewer - Kitty_Tunnel_Helper" --windows-file-version=1.3.6.0 --windows-product-name="Kitty_Tunnel_Helper"
+# nuitka bin/k_utils/k_tunnel.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name="open-networks.ru" --windows-file-description="microViewer - Kitty_Tunnel" --windows-file-version=1.3.7.0 --windows-product-name="Kitty_Tunnel"
+# nuitka bin/k_utils/k_tunnel_helper.py --follow-imports --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name="open-networks.ru" --windows-file-description="microViewer - Kitty_Tunnel_Helper" --windows-file-version=1.3.7.0 --windows-product-name="Kitty_Tunnel_Helper"
  - main.py
-# nuitka main.py --follow-imports --plugin-enable=pyqt5 --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name="open-networks.ru" --windows-file-description="microViewer - Remote Access over SSH" --windows-file-version=1.3.6.0 --windows-product-name="microViewer"
+# nuitka main.py --follow-imports --plugin-enable=pyqt5 --standalone --windows-disable-console --windows-icon-from-ico=bin\ui\img\microViewer.ico --remove-output --windows-company-name="open-networks.ru" --windows-file-description="microViewer - Remote Access over SSH" --windows-file-version=1.3.7.0 --windows-product-name="microViewer"
 ```
